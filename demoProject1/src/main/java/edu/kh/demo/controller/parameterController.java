@@ -1,0 +1,38 @@
+package edu.kh.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Slf4j
+@Controller
+@RequestMapping("param")
+public class parameterController {
+	
+	@GetMapping("main")
+	public String paramMain() {
+		System.out.println("/param/main requested");
+		
+		return "param/param_main";
+	}
+	
+	@PostMapping("test1")
+	public String paramTest1(HttpServletRequest req){
+		System.out.println("/param/test1 post");
+
+		String inputName = req.getParameter("inputName");
+		int inputAge = Integer.parseInt(req.getParameter("inputAge"));
+		String inputAddress = req.getParameter("inputAddress");
+		
+		log.debug("inputName	:" + inputName);
+		log.debug("inputAge	:" + inputAge);
+		log.debug("inputAddress	:" + inputAddress);
+
+		return "redirect:main";
+	}
+}
