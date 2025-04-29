@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thymeleaf 예제4</title>
+</head>
+<body>
+    <h1>thymeleaf 예제4</h1>
+    <h3>th:if / th:unless</h3>
+    <pre>
+        th:if = "조건식"
+        - 조건식이 true일 때 내용 표시
+        - 조건식이 false일 때 내용 표시
+
+        th:unless = "조건식"
+        - 조건식이 false일 때 내용 표시
+        - 조건식이 true일 때 내용 표시
+    </pre>
+
+    <th:block th:if="${std == null}">
+        <h4>std == null</h4>
+    </th:block>
+
+<!--<th:block th:if="${std != null}">-->
+    <th:block th:unless="${std == null}">
+        <h4>std != null</h4>
+    </th:block>
+
+    <br>
+    <p>
+        변수명/값 작성시 작성된 값 있으면 true, 없으면 false
+    </p>
+    <h4 th:if="${std}">std 변수가 있음</h4>
+    <h4 th:unless="${std}">std 변수가 없음</h4>
+    <h4 th:if="${temp}">temp 변수가 있음</h4>
+    <h4 th:unless="${temp}">temp 변수가 없음</h4>
+
+    <hr>
+
+    <h3>th:switch / th:case</h3>
+    <th:block th:switch="${num}">
+        <p th:case="100">num은 100</p>
+        <p th:case="200">num은 200</p>
+        <p th:case="300">num은 300</p>
+        <p th:case="*">* default</p>
+    </th:block>
+    
+    <hr>
+    <h3>? : 연산자</h3>
+    <pre>
+        (조건) ? (참) : (거짓)
+    </pre>
+
+    <p>공백 있으면 '' 무조건!!!!!</p>
+    <h4 th:text="${std.studentAge == 30} ? 30살 : '30살이 아님'">?:</h4>
+    <h4 th:text="${std.studentAge == 30 ? '30살' : '30살이 아님'}">?:</h4>
+
+    <h3>Elvis 연산자 ?:</h3>
+    <pre>
+        value ?: value == null 일때
+        -삼항 연산자에서 조건식 자리에 값(변수)만 작성
+        (==,!= )
+    </pre>
+
+    <p th:text="${temp} ?: 'no temp'"></p>
+    <p th:text="${std} ?: 'no std'"></p>
+
+    <h3>No-Operation</h3>
+    <pre>
+        왼쪽 값이 null이면 thymeleaf 태그 해석 X
+    </pre>
+
+    <p th:text="${temp} ?: _">temp 변수가 null일 때 기본값</p>
+    <p th:text="${std} ?: _">std 변수가 null일 때 기본값</p>
+
+</body>
+</html>

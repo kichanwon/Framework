@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+</head>
+<body>
+    <h1>타임리프 예제3</h1>
+    <h3>link url @{...}</h3>
+    <ul>
+        <li>
+            <a href="/board?key=title&query=query">/board</a>
+        </li>
+        <li>
+            <a href="/board?key=title&query=query">/board</a>
+        </li>
+        <li>
+            <a th:href="@{/board(key=${key},query=${query})}">/board</a>
+        </li>
+
+        <li>
+            <a th:href="@{/example/ex3/{number}(number=${boardNo})}">/example/ex3/{number}</a>
+        </li>
+
+        <li>
+            path variable
+            <ul>
+                <li>
+                    <a href="/example/ex3/1">/example/ex3/1</a>
+                </li>
+                <li>
+                    <a th:href="@{/example/ex3/{number}(number=2)}">/example/ex3/2</a>
+                </li>
+                <li>
+                    <a th:href="@{/example/ex3/{number}(number=99)}">/example/ex3/test</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    
+    
+</body>
+</html>

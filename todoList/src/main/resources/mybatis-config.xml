@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<!-- 
+			jdbcTypeForNull 속성
+			SQL 에 NULL 을 지정할 때
+			MyBatis 에서 사용할 자료형을 지정하는 속성
+		-->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+
+		<!-- 
+			mapUnderscoreToCamelCase 속성
+			MyBatis 에서 컬럼명을 카멜케이스로 변환할지 여부를 지정하는 속성
+		-->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+
+</configuration>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thymeleaf 예제5</title>
+    <style>
+        .red {color: red;}
+        .blue {color: blue;} 
+        .green {color: green;}
+        .deco {text-decoration: underline; }
+        .bold {font-weight: bold;}
+    </style>
+</head>
+<body>
+    <h1>thymeleaf 예제5</h1>
+
+    <h3>th:inline = "javascript"</h3>
+    <pre>
+        - script tag
+        - js type으로 변환
+    </pre>
+
+    <p id="message"></p>
+    <p id="num1"></p>
+    <p id="std"></p>
+
+    <hr>
+
+    <h3>th:classappend : dynamic하게 class append하기</h3>
+
+    <p class="red" th:classappend="deco">빨간색</p>
+
+    <!-- <p th:classappend="red deco">빨간색</p> ← 이렇게 쓰면 안됨 -->
+    <p class="deco" th:classappend="${num1 gt 10000} ? 'green' : 'red'">th:classappend="${num1 gt 10000} ? 'green' : 'red'"</p>
+
+
+    <h3>안전 탐색 연산자 ${object?.field}</h3>
+    <p th:text="${std?.studentNo}">기본값</p>
+    <p th:text="${member?.memberId}">기본값</p> <!-- ← null 검사 후 아닌 경우 실행 -->
+
+
+    <h3>${#numbers.sequence(시작, 끝 [,step])} : 번호 발생기</h3>
+    <pre>
+      - 시작 부터 끝 까지 번호로만 이루어진 숫자 배열 생성
+  
+      ex) ${#numbers.sequence(1, 5)} => [1,2,3,4,5]
+  
+      [왜 사용할까?]
+      - 타임리프 반복문 th:each 는 향상된 for문형태로
+        일반 for문의 동작 (시작~끝까지 몇 씩 증가며 반복)을 못하기 때문에
+        이를 해결하기 위해서 사용
+    </pre>
+  
+    <ul>
+      <!-- 11부터 시작해서 20까지 2씩 증가하며 반복하면서 li 태그 출력 -->
+      <!-- 1. [11, 13, 15, 17, 19] 로 이루어진 배열 발생 -->
+      <li th:each="i : ${#numbers.sequence(11,20,2)}"
+        th:text="|테스트 ${i}|"></li>
+      <!-- 
+      <li>테스트 11</li>
+      <li>테스트 13</li>
+      <li>테스트 15</li>
+      <li>테스트 17</li>
+      <li>테스트 19</li>
+      -->
+    </ul>
+
+    <script th:inline="javascript">
+        // html 독릭 실행시
+        // js 내부 thymeleaf 태그 해석 안됨 → 오류 X
+
+        const msg = /*[[${message}]]*/ "";
+        const num1 = /*[[${num1}]]*/ 0;
+        const std = /*[[${std}]]*/ null;
+
+        document.querySelector("#message").innerText = msg;
+        document.getElementById("num1").innerText = num1;
+        document.getElementById("std").innerText = std;
+    </script>
+</body>
+</html>

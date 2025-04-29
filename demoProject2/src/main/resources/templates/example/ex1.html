@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymeleaf prac1</title>
+</head>
+<body>
+    <h1>Thymeleaf prac1</h1>
+
+    <pre>
+        Spring EL(Expression Language)
+        - ${key} : 변수, Model 등을 이용 세팅한 값 출력
+
+        th:text 속성="속성값"
+        - 타임리프를 이용해서 속성값을 작성된 태그의 내용(innerText)으로 출력
+
+        th 속성은 해석 후 사라짐
+    </pre>
+
+    <h4 th:text="${test1}">test1 value</h4>
+    <h4 th:text="${test2}">test2 value</h4>
+
+    <h2>단일 값 출력</h2>
+    productName : <th:block th:text="${productName}">상품명</th:block>
+        / <span th:text="${productName}">상품명</span>
+    <br><hr>
+
+    price : <span class="price">
+        <th:block th:text="${price}">price</th:block> won
+    </span>
+
+    <th:block th:each="fruit : ${fruitList}">과일</th:block>
+    th:each="fruit : ${fruitList}" th:block 단독
+    <br>
+    
+    <th:block th:each="fruit : ${fruitList}" th:text="${fruit}">과일</th:block>
+    th:text="${fruit}" 추가
+    <br>
+
+
+    <h2>th:each 반복 출력</h2>
+    <ul>
+        <li th:each="fruit : ${fruitList}" th:text="${fruit}">과일</li>
+    </ul>
+    <hr>
+    <th:block th:each="fruit : ${fruitList}">
+        <li th:text="${fruit}">과일</li>
+    </th:block>
+    <br>
+
+
+
+    <h2>list 반복 출력</h2>
+    <ul>
+        <li th:text="${fruitList[0]}">[0]index fruit</li>
+        <li th:text="${fruitList[1]}">[1]index fruit</li>
+        <li th:text="${fruitList[2]}">[2]index fruit</li>
+    </ul>
+
+
+    <h2>object 반복 출력</h2>
+    <ul>
+        <li th:text="${std.studentNo}">[0]index studentNo</li>
+        <li th:text="${std.studentName}">[0]index studentName</li>
+        <li th:text="${std.studentAge}">[0]index studentAge</li>
+    </ul>
+    <hr>
+    <ul th:object="${std}" th:each="std : ${stdList}">
+        <span th:text="*{studentNo}">[0]index studentNo</span>
+        <span th:text="*{studentName}">[0]index studentName</span>
+        <span th:text="*{studentAge}">[0]index studentAge</span>
+    </ul>
+
+    <table border="1">
+        <tr>
+            <th>학번</th>
+            <th>이름</th>
+            <th>나이</th>
+        </tr>
+        <tr th:object="${std}" th:each="std : ${stdList}">
+            <td th:text="*{studentNo}"></td>
+            <td th:text="*{studentName}"></td>
+            <td th:text="*{studentAge}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

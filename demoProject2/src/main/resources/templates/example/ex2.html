@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymeleaf prac2</title>
+</head>
+<body>
+
+    <h1>타임리프 예제2</h1>
+    <h3>파라미터 확인</h3>
+
+    <pre>
+        ${param.key}
+    </pre>
+    <li th:text="${param.inputName}">inputName</li>
+    <li th:text="${param.inputAge}">inputAge</li>
+    <li th:text="${param.color}">checkedColor</li>
+    <br>
+
+    <li th:each="color : ${param.color}">
+        <span th:text="${color}">color</span>
+    </li>
+    <br>
+    <li th:each="color : ${param.color}" th:text="${color}">color</li>
+    <hr>
+    <pre>
+        th:text 속성은 태그 내부에 있는 데이터를 그대로 출력
+        th:utext 속성은 태그 내부에 있는 데이터를 태그 형식으로 해석하여 출력
+    </pre>
+    <th:block th:text="${str}">color</th:block>
+    <th:block th:utext="${str}">color</th:block>
+    <hr>
+    <pre>
+        th:text="|string ${str}|"
+        문자열 + 변수 값 출력 시 사용
+    </pre>
+    <th:block th:text="|th:text string => ${str}|">color</th:block><br>
+    <th:block th:utext="|th:utext string => ${str}|">color</th:block>
+    <hr>
+
+    <h3>th:text / th:utext</h3>
+    <pre>
+        th:text == [[...]]
+        th:utext == [(...)]
+    </pre>
+    <p>input name : [[${param.inputName}]]</p>
+    [(${str})]
+    [[${str}]]
+
+    <hr>
+    <h3>messages.properties</h3>
+    <h3 th:text="#{app.name}">앱 이름</h3>
+    <img th:src="#{user.default.image}" alt="기본 이미지" width="100px">
+</body>
+</html>

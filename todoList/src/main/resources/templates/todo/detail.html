@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${todo.todoTitle}">Todo Detail</title>
+    <link rel="stylesheet" href="/css/detail.css">
+</head>
+<body th:object="${todo}">
+    <h3 th:text="*{todoTitle}">할 일 상세</h3>
+
+    <table border="1" >
+        <tr>
+            <th>번호</th>
+            <td th:text="*{todoNo}">1</td>
+        </tr>
+        <tr>
+            <th>등록일</th>
+            <!-- <td th:text="${todo.regDate}">2025-01-01</td> -->
+            <td th:text="*{regDate}">2025-01-01</td>
+            <!-- <td>[[${todo.regDate}]]</td> -->
+            <!-- <td>[[*{regDate}]]</td> -->
+        </tr>
+        <tr>
+            <th>완료</th>
+            <td>
+                <button type="button"
+                class="complete-btn"
+                th:text="*{complete}"
+                th:data-todo-no="*{todoNo}">완료</button>
+            </td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td><pre th:text="*{todoContent}">내용</pre></td>
+        </tr>
+    </table>
+
+    <button id="goToList">목록으로</button>
+    <button id="updateBtn" th:data-todo-no="*{todoNo}">수정</button>
+    <button id="deleteBtn" th:data-todo-no="*{todoNo}">삭제</button>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+    <script src="/js/detail.js"></script>
+</body>
+</html>

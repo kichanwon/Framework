@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List - Boot</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <h1>Todo List</h1>
+
+    <h3><a href="/ajax/main">TodoList Ajax 버전</a></h3>
+
+    <p th:text="${testTitle}">testTitle</p>
+
+    <hr>
+
+    <form action="todo/add" method="post">
+        <h4>할 일 추가</h4>
+        <div>
+            제목 : <input type="text" name="todoTitle" placeholder="제목을 입력하세요.">
+        </div>
+        <div>
+            내용 : <textarea name="todoContent"
+            placeholder="내용을 입력하세요."></textarea>
+        </div>
+        <button type="submit">추가</button>
+    </form>
+
+    <!-- ${#lists.size(todoList)} -->
+    <h3 th:text="| 전체 할 일 : (${#lists.size(todoList)}) 개 / 완료 : (${completeCount}) 개 |"></h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>index</th>
+                <th>todoNo</th>
+                <th>todoTitle</th>
+                <th>complete</th>
+                <th>regDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="todo,iterStat : ${todoList}" th:object="${todo}">
+                <tr>
+                    <td th:text="${iterStat.index+1}">index</td>
+                    <td th:text="*{todoNo}">todoNo</td>
+                    <td><a th:text="*{todoTitle}" th:href="@{/todo/detail(todoNo=*{todoNo})}">todoTitle</a></td>
+                    <td th:text="*{complete}">complete</td>
+                    <td th:text="*{regDate}">regDate</td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+</body>
+</html>

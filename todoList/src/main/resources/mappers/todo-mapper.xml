@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.todo.model.mapper.TodoMapper">
+
+  <!-- 
+  <cache-ref namespace=""/> ← 삭제 ㄱㄱ
+  namespace="edu.kh.todo.model.mapper.TodoMapper" ← Mapper Interface(DAO) 전체 경로 작성
+  -->
+
+  <select id="testTitle">
+    SELECT TODO_TITLE
+    FROM TB_TODO
+    WHERE TODO_NO = 1
+  </select>
+
+
+
+  <select id="selectTodoList" resultType="Todo">
+    SELECT TODO_NO, TODO_TITLE, TODO_CONTENT, COMPLETE, TO_CHAR(REG_DATE, 'YYYY-MM-DD') REG_DATE
+    FROM TB_TODO
+    ORDER BY TODO_NO ASC
+  </select>
+
+  <select id="getCompleteCount" resultType="_int">
+    SELECT COUNT(*)
+    FROM TB_TODO
+    WHERE COMPLETE = 'Y'
+  </select>
+
+  <!-- 
+  #{변수 명 | 필드 명} : ' ' 붙여서 변수 표기   : 
+  ${변수 명 | 필드 명} : 변수 값을 그대로 표기  : 숫자, SQL문이 변해야 하는 경우
+   -->
+  <insert id="addTodo" parameterType="Todo">
+    INSERT INTO TB_TODO
+    (TODO_NO, TODO_TITLE, TODO_CONTENT, COMPLETE, REG_DATE)
+    VALUES (SEQ_TODO_NO.NEXTVAL, #{todoTitle}, #{todoContent}, 'N', SYSDATE)
+  </insert>
+
+  <select id="todoDetail" resultType="Todo" parameterType="_int"> <!-- parameterType 생략 가능 -->
+    SELECT TODO_NO, TODO_TITLE, TODO_CONTENT, COMPLETE, TO_CHAR(REG_DATE, 'YYYY-MM-DD') REG_DATE
+    FROM TB_TODO
+    WHERE TODO_NO = #{todoNo} <!-- ← 숫자는 $ # 둘다 사용 가능 -->
+  </select>
+
+  <update id="changeComplete" parameterType="Todo">
+    UPDATE TB_TODO
+    SET COMPLETE = #{complete}
+    WHERE TODO_NO = #{todoNo}
+  </update>
+
+  <delete id="deleteTodo" parameterType="_int">
+    DELETE FROM TB_TODO
+    WHERE TODO_NO = #{todoNo}
+  </delete>
+
+  <update id="updateTodo" parameterType="Todo">
+    UPDATE TB_TODO
+    SET TODO_TITLE = #{todoTitle}, TODO_CONTENT = #{todoContent}
+    WHERE TODO_NO = #{todoNo}
+  </update>
+
+  <select id="getTotalCount" resultType="_int">
+    SELECT COUNT(*)
+    FROM TB_TODO
+  </select>
+
+</mapper>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${todo.todoTitle}">Todo Detail</title>
+    <link rel="stylesheet" href="/css/update.css">
+</head>
+<body th:object="${todo}">
+    <h1 th:text="*{todoTitle}">할 일 수정</h1>
+
+    <hr>
+
+    <form action="/todo/update" method="post">
+        <div>
+            제목 : <input type="text" name="todoTitle" th:value="*{todoTitle}" />
+        </div>
+        <div>
+            내용 : <textarea name="todoContent" th:text="*{todoContent}" cols="50" rows="5" placeholder="상세 내용"></textarea>
+        </div>
+        <input type="hidden" name="todoNo" th:value="*{todoNo}">
+        <button type="submit">수정 완료</button>
+    </form>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+    <script src="/js/update_detail.js"></script>
+</body>
+</html>
