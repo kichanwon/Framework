@@ -8,16 +8,63 @@
 <body>
     <h1>param_main</h1>
 
-    <fieldset>
-        <legend><h3>1.HttpServletRequest.getParameter("key")</h3></legend>
-        <form action="/param/test1" method="post">
-            name    : <input type="text" name="inputName"><br>
-            age     : <input type="number" name="inputAge"><br>
-            address : <input type="text" name="inputAddress"><br>
-    
-            <button>submit</button>
-        </form>
-    </fieldset>
-    
+	<fieldset>
+	    <legend><h3>1.HttpServletRequest.getParameter("key")</h3></legend>
+	    <form action="/param/test1" method="post">
+	        name    : <input type="text" name="inputName"><br>
+	        age     : <input type="number" name="inputAge"><br>
+	        address : <input type="text" name="inputAddress"><br>
+
+	        <button>submit</button>
+	    </form>
+	</fieldset>
+	
+	<fieldset>
+	    <legend><h3>2.RequestParam</h3></legend>
+	    <form action="/param/test2" method="post">
+	        book title	: <input type="text" name="bookTitle"><br>
+	        author		: <input type="text" name="bookAuthor"><br>
+			book price	: <input type="number" name="bookPrice"><br>
+			publisher	: <input type="text" name="bookPublisher"><br>
+
+	        <button>submit</button>
+	    </form>
+	</fieldset>
+	
+	<fieldset>
+	    <legend><h3>3.RequestParam annotation</h3></legend>
+	    <form action="/param/test3" method="post">
+	        color	: 
+			Red<input type="checkbox" name="color" value="Red">
+			Green<input type="checkbox" name="color" value="Green">
+			Blue<input type="checkbox" name="color" value="Blue">
+			<br>
+			
+			fruit	:
+			apple<input type="checkbox" name="fruit" value="apple">
+			berry<input type="checkbox" name="fruit" value="berry">
+			lemon<input type="checkbox" name="fruit" value="lemon">
+			<br>
+			
+			product_name	: <input type="text" name="productName"><br>
+			expirationDate	: <input type="date" name="expirationDate"><br>
+			
+	        <button>submit</button>
+	    </form>
+	</fieldset>
+	
+	<fieldset>
+	    <legend><h3>4.@ModelAttribute</h3></legend>
+	    <form action="/param/test4" method="post">
+			id	 : <input type="text"		name="memberId"><br>
+			pw	 : <input type="password"	name="memberPw"><br>
+			name : <input type="text"		name="memberName"><br>
+			age	 : <input type="number"		name="memberAge"><br>
+			
+	        <button>submit</button>
+	    </form>
+	</fieldset>
+	
+	
 </body>
 </html>
