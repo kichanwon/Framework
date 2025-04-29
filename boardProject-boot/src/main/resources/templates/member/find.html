@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 가입</title>
+
+  <th:block th:replace="~{common/common}"></th:block>
+
+  <!-- 회원가입 페이지만의 css 추가 -->
+  <link rel="stylesheet" href="/css/myPage/find.css">
+</head>
+<body>
+
+  <main>
+    <!-- 헤더 추가 -->
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <section class="myPage-content">
+
+      <th:block th:replace="~{member/findMenu}"></th:block>
+
+      <section class="myPage-main" id="findIdForm">
+        <h1 class="myPage-title">아이디 찾기</h1>
+        <span class="myPage-subject">
+          가입 시 입력한 닉네임과 전화번호를 입력해주세요.
+        </span>
+
+
+        <form action="findId" method="POST" name="myPageFrm" id="IdForm">
+
+          <div class="myPage-row">
+            <!-- 닉네임 입력 -->
+            <label for="memberNickname">
+              닉네임
+            </label>
+              <input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" maxlength="10" >
+          </div>
+
+
+          <div class="myPage-row">
+            <label for="memberTel">
+              전화번호
+            </label>
+            
+            <input type="text" name="memberTel" id="memberTel" maxlength="30" placeholder="전화번호를 입력해주세요.">              
+          </div>
+
+
+          <button class="myPage-submit">찾기</button>
+
+        </form>
+      </section>
+
+      <section class="myPage-main hidden" id="findPwForm">
+        <h1 class="myPage-title">비밀번호 변경</h1>
+        <span class="myPage-subject">
+          가입 시 입력한 이메일을 입력해주세요.
+        </span>
+
+
+        <form action="findPw" method="POST" name="myPageFrm" id="PwForm">
+
+          <div class="myPage-row">
+              <input type="text" name="memberEmail" id="memberEmail" 
+              placeholder="아이디(이메일)" maxlength="30" autocomplete="off">
+              
+              <button id="sendAuthKeyBtn" type="button">인증번호 받기</button>
+          </div>
+
+          <div class="myPage-row hidden">
+              <label>인증번호</label>
+              <input type="text" name="authKey" id="authKey" maxlength="6" placeholder="인증번호를 입력해주세요.">              
+          </div>
+
+          <button class="myPage-submit">비밀번호 변경</button>
+
+        </form>
+      </section>
+
+
+    </section>
+
+  </main>
+
+  <!-- 푸터 추가 -->
+  <th:block th:replace="~{common/footer}"></th:block>
+
+  <!-- 회원 가입 JS 추가 -->
+  <script src="/js/myPage/find.js"></script> 
+  
+</body>
+</html>
